@@ -1,0 +1,36 @@
+<div class="single-post">
+    <h2>{{ post.picName }}</h2>
+    <div class="post-picture" style="background-image:url({{ post.picPath }})"></div>
+    <p class="content">{{ post.content }}</p>
+    <div class="creator">
+        <img src="{{ post.creatorId.avatarUrl }}" />
+        {{ post.creatorId.username }}
+    </div>
+</div>
+
+{{#if post.comments}}
+<div id="comments">
+    <h3>Comments</h3>
+    {{#each post.comments}}
+        <div class="comment">
+            <img src="{{ this.authorId.avatarUrl }}" class="profile-pic" />
+            <div>
+                <span class="author-name">{{ this.authorId.username }} :</span>
+                {{ this.content }}<br/>
+                {{#if this.imageName }}<br/><em>{{ this.imageName }}</em><br/>{{/if}}
+                {{#if this.imagePath }}<div style="background-image:url({{ this.imagePath }})" class="comment-pic"></div>{{/if}}
+            </div>
+        </div>
+    {{/each}}
+</div>
+{{/if}}
+
+<div id="add-comment">
+    <h3>Add a comment</h3>
+    <form action="/comments/{{ post._id }}/add" method="POST" enctype="multipart/form-data">
+        <input type="text" name="imageName" id="imageName" placeholder="Name of the picture" />
+        <textarea name="content" id="content" placeholder="Your content" required ></textarea>
+        <input type="file" name="picture" id="picture" />
+        <input type="submit" value="Add comment">
+    </form>
+</div>

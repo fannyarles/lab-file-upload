@@ -1,0 +1,13 @@
+<div id="posts">
+    {{#each posts}}
+        <div class="post">
+            <h2><a href="/posts/{{ this._id }}">{{ this.picName }}</a></h2>
+            <div class="post-picture" style="background-image:url({{ this.picPath }})"></div>
+            <p class="content">{{ this.content }}</p>
+            <div class="creator">
+                <img src="{{ this.creatorId.avatarUrl }}" />
+                {{ this.creatorId.username }}
+            </div>
+        </div>
+    {{/each}}
+</div>
